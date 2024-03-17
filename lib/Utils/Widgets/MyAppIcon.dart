@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery_app/Utils/Constants/MySizes.dart';
 
 class MyAppIcon extends StatelessWidget {
   const MyAppIcon({
@@ -8,11 +7,13 @@ class MyAppIcon extends StatelessWidget {
     this.size = 40,
     this.iconColor = const Color(0xFF756d54),
     this.backgroundColor = const Color(0xFFfcf4e4),
+    this.iconsize = 16,
   });
   final IconData icon;
   final Color backgroundColor;
   final Color iconColor;
   final double size;
+  final double iconsize;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,7 +26,7 @@ class MyAppIcon extends StatelessWidget {
       child: Icon(
         icon,
         color: iconColor,
-        size: MySizes.iconsize16,
+        size: iconsize,
       ),
     );
   }

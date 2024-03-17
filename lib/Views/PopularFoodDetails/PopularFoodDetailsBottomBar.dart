@@ -3,20 +3,20 @@ import 'package:food_delivery_app/Utils/Constants/MyColors.dart';
 import 'package:food_delivery_app/Utils/Constants/MySizes.dart';
 import 'package:food_delivery_app/Utils/Widgets/MyBigText.dart';
 
-class FoodDetailsBottomBar extends StatelessWidget {
-  const FoodDetailsBottomBar({
+class PopularFoodDetailsBottomBar extends StatelessWidget {
+  const PopularFoodDetailsBottomBar({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 120,
+      height: MySizes.bottomHeightBar,
       padding: EdgeInsets.only(
         left: MySizes.width20,
         right: MySizes.width20,
-        top: MySizes.height30,
-        bottom: MySizes.height30,
+        top: MySizes.height20,
+        bottom: MySizes.height20,
       ),
       decoration: BoxDecoration(
         color: MyColors.buttonBackgroundColor,

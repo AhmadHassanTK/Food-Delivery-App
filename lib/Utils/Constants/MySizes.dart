@@ -20,6 +20,7 @@ class MySizes {
   static double width30 = screenHeight / 28.13;
   static double width45 = screenHeight / 18.76;
 
+  static double font16 = screenHeight / 52.75;
   static double font20 = screenHeight / 42.2;
   static double font26 = screenHeight / 32.46;
 
@@ -34,4 +35,6 @@ class MySizes {
   static double listViewTextContSize = screenWidth / 3.9;
 
   static double foodImgSize = screenHeight / 2.41;
+
+  static double bottomHeightBar = screenHeight / 7.03;
 }

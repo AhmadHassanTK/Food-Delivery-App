@@ -60,105 +60,107 @@ class UpperPageView extends StatelessWidget {
     print('the height is ${Get.context!.height}');
     return Transform(
       transform: matrix,
-      child: Stack(
-        children: [
-          Container(
-            height: MySizes.pageViewContainer,
-            margin:
-                EdgeInsets.only(left: MySizes.width10, right: MySizes.width10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(MySizes.radius30),
-              color: index.isEven ? Colors.green : Colors.red,
-              image: const DecorationImage(
-                image: AssetImage('assets/image/food1.png'),
-                fit: BoxFit.cover,
+      child: GestureDetector(
+        child: Stack(
+          children: [
+            Container(
+              height: MySizes.pageViewContainer,
+              margin: EdgeInsets.only(
+                  left: MySizes.width10, right: MySizes.width10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(MySizes.radius30),
+                color: index.isEven ? Colors.green : Colors.red,
+                image: const DecorationImage(
+                  image: AssetImage('assets/image/food1.png'),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              height: MySizes.pageViewTextContainer,
-              margin: EdgeInsets.only(
-                left: MySizes.width30,
-                right: MySizes.width30,
-                bottom: MySizes.height30,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(MySizes.radius20),
-                color: Colors.white,
-                boxShadow: const [
-                  BoxShadow(
-                    color: Color(0xFFe8e8e8),
-                    blurRadius: 5,
-                    offset: Offset(0, 5),
-                  ),
-                  BoxShadow(
-                    color: Colors.white,
-                    offset: Offset(5, 0),
-                  ),
-                  BoxShadow(
-                    color: Colors.white,
-                    offset: Offset(-5, 0),
-                  ),
-                ],
-              ),
+            Align(
+              alignment: Alignment.bottomCenter,
               child: Container(
-                padding: EdgeInsets.only(
-                  top: MySizes.height15,
-                  right: MySizes.width15,
-                  left: MySizes.width15,
+                height: MySizes.pageViewTextContainer,
+                margin: EdgeInsets.only(
+                  left: MySizes.width30,
+                  right: MySizes.width30,
+                  bottom: MySizes.height30,
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const MyBigText(text: 'Chinese Side'),
-                    SizedBox(height: MySizes.height10),
-                    Row(
-                      children: [
-                        Wrap(
-                          children: List.generate(
-                            5,
-                            (index) => const Icon(
-                              Icons.star,
-                              color: MyColors.mainColor,
-                              size: 15,
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: MySizes.width10),
-                        const MySmallText(text: '4.5'),
-                        SizedBox(width: MySizes.width10),
-                        const MySmallText(text: '1287 comments'),
-                      ],
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(MySizes.radius20),
+                  color: Colors.white,
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Color(0xFFe8e8e8),
+                      blurRadius: 5,
+                      offset: Offset(0, 5),
                     ),
-                    SizedBox(height: MySizes.height15),
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        MyTextAndIcon(
-                          icon: Icons.circle_sharp,
-                          text: 'Normal',
-                          iconColor: MyColors.iconColor1,
-                        ),
-                        MyTextAndIcon(
-                          icon: Icons.location_on,
-                          text: '1.7Km',
-                          iconColor: MyColors.mainColor,
-                        ),
-                        MyTextAndIcon(
-                          icon: Icons.access_time_rounded,
-                          text: '32min',
-                          iconColor: MyColors.iconColor2,
-                        ),
-                      ],
-                    )
+                    BoxShadow(
+                      color: Colors.white,
+                      offset: Offset(5, 0),
+                    ),
+                    BoxShadow(
+                      color: Colors.white,
+                      offset: Offset(-5, 0),
+                    ),
                   ],
                 ),
+                child: Container(
+                  padding: EdgeInsets.only(
+                    top: MySizes.height15,
+                    right: MySizes.width15,
+                    left: MySizes.width15,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const MyBigText(text: 'Chinese Side'),
+                      SizedBox(height: MySizes.height10),
+                      Row(
+                        children: [
+                          Wrap(
+                            children: List.generate(
+                              5,
+                              (index) => const Icon(
+                                Icons.star,
+                                color: MyColors.mainColor,
+                                size: 15,
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: MySizes.width10),
+                          const MySmallText(text: '4.5'),
+                          SizedBox(width: MySizes.width10),
+                          const MySmallText(text: '1287 comments'),
+                        ],
+                      ),
+                      SizedBox(height: MySizes.height15),
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          MyTextAndIcon(
+                            icon: Icons.circle_sharp,
+                            text: 'Normal',
+                            iconColor: MyColors.iconColor1,
+                          ),
+                          MyTextAndIcon(
+                            icon: Icons.location_on,
+                            text: '1.7Km',
+                            iconColor: MyColors.mainColor,
+                          ),
+                          MyTextAndIcon(
+                            icon: Icons.access_time_rounded,
+                            text: '32min',
+                            iconColor: MyColors.iconColor2,
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
