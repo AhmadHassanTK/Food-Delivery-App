@@ -3,7 +3,7 @@ import 'package:food_delivery_app/Utils/Constants/MyColors.dart';
 import 'package:food_delivery_app/Utils/Constants/MySizes.dart';
 import 'package:food_delivery_app/Utils/Widgets/MyAppIcon.dart';
 import 'package:food_delivery_app/Utils/Widgets/MyBigText.dart';
-import 'package:food_delivery_app/Views/PopularFoodDetails/ExtendableText.dart';
+import 'package:food_delivery_app/Views/PopularFoodDetails/Widgets/ExtendableText.dart';
 
 class RecommendedFoodDetails extends StatelessWidget {
   const RecommendedFoodDetails({super.key});

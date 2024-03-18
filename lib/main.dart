@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/Views/Home/HomePage.dart';
 import 'package:get/get.dart';
+import 'utils/API/Dependencies.dart' as dep;
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await dep.init();
   runApp(const MyApp());
 }
 

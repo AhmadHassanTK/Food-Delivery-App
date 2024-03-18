@@ -5,8 +5,8 @@ import 'package:food_delivery_app/Utils/Widgets/MyAppIcon.dart';
 import 'package:food_delivery_app/Utils/Widgets/MyBigText.dart';
 import 'package:food_delivery_app/Utils/Widgets/MySmallText.dart';
 import 'package:food_delivery_app/Utils/Widgets/MyTextAndIcon.dart';
-import 'package:food_delivery_app/Views/PopularFoodDetails/ExtendableText.dart';
-import 'package:food_delivery_app/Views/PopularFoodDetails/PopularFoodDetailsBottomBar.dart';
+import 'package:food_delivery_app/Views/PopularFoodDetails/Widgets/ExtendableText.dart';
+import 'package:food_delivery_app/Views/PopularFoodDetails/Widgets/PopularFoodDetailsBottomBar.dart';
 
 class PopularFoodDetails extends StatelessWidget {
   const PopularFoodDetails({super.key});
