@@ -1,4 +1,5 @@
-import 'package:food_delivery_app/Models/PopularProductModel.dart';
+import 'package:food_delivery_app/Models/CategoriesProductsModel.dart';
+import 'package:food_delivery_app/Models/ProductModel.dart';
 import 'package:food_delivery_app/Views/PopularFoodDetails/Repo/PopularFoodRepo.dart';
 import 'package:get/get.dart';
 
@@ -9,16 +10,18 @@ class PopularFoodController extends GetxController {
 
   PopularFoodController({required this.popularFoodRepo});
 
-  RxList<dynamic> popularProductsList = [].obs;
+  List<ProductModel> _popularProductsList = [];
+
+  List<ProductModel> get popularProductsList => _popularProductsList;
 
   Future<void> getPopularProductsList() async {
     Response response = await popularFoodRepo.getPopularProductsList();
     if (response.statusCode == 200) {
-      print('got products');
-      popularProductsList.clear();
-      popularProductsList.addAll(
-          PopularProductModel.fromJson(response.body).productsList as Iterable);
-      print(popularProductsList.length);
+      _popularProductsList.clear();
+      _popularProductsList.addAll(
+          CategoriesProductsModel.fromJson(response.body).productsList
+              as Iterable<ProductModel>);
+      update();
     }
   }
 }

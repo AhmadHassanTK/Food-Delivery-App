@@ -7,6 +7,8 @@ import 'package:food_delivery_app/Utils/Constants/MySizes.dart';
 import 'package:food_delivery_app/Utils/Widgets/MySectionTitle.dart';
 import 'package:food_delivery_app/Views/Home/FoodListView.dart';
 import 'package:food_delivery_app/Views/Home/UpperPageView.dart';
+import 'package:food_delivery_app/Views/PopularFoodDetails/Controller/PopularFoodController.dart';
+import 'package:get/get.dart';
 
 class HomePageBody extends StatefulWidget {
   const HomePageBody({super.key});
@@ -41,21 +43,34 @@ class _HomePageBodyState extends State<HomePageBody> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            UpperPageView(
-              currpageindex: currpageindex,
-              scalefactor: scalefactor,
-              pageController: pageController,
-            ),
-            DotsIndicator(
-              dotsCount: 5,
-              position: currpageindex.toInt(),
-              decorator: DotsDecorator(
-                size: const Size.square(9),
-                activeSize: const Size(18, 9),
-                activeShape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50)),
-                activeColor: MyColors.mainColor,
-              ),
+            GetBuilder<PopularFoodController>(
+              builder: (controller) {
+                return controller.popularProductsList.isNotEmpty
+                    ? Column(
+                        children: [
+                          UpperPageView(
+                            currpageindex: currpageindex,
+                            scalefactor: scalefactor,
+                            pageController: pageController,
+                            controller: controller,
+                          ),
+                          DotsIndicator(
+                            dotsCount: controller.popularProductsList.length,
+                            position: currpageindex.toInt(),
+                            decorator: DotsDecorator(
+                              size: const Size.square(9),
+                              activeSize: const Size(18, 9),
+                              activeShape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50),
+                              ),
+                              activeColor: MyColors.mainColor,
+                            ),
+                          ),
+                        ],
+                      )
+                    : const CircularProgressIndicator(
+                        color: MyColors.mainColor);
+              },
             ),
             SizedBox(height: MySizes.height30),
             const MySectionTitle(bigText: 'Popular', smallText: 'Food Pairing'),

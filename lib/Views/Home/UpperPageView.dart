@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/Models/ProductModel.dart';
+import 'package:food_delivery_app/Utils/Constants/MyAppConstants.dart';
 import 'package:food_delivery_app/Utils/Constants/MyColors.dart';
 import 'package:food_delivery_app/Utils/Constants/MySizes.dart';
 import 'package:food_delivery_app/Utils/Widgets/MyBigText.dart';
 import 'package:food_delivery_app/Utils/Widgets/MySmallText.dart';
 import 'package:food_delivery_app/Utils/Widgets/MyTextAndIcon.dart';
+import 'package:food_delivery_app/Views/PopularFoodDetails/Controller/PopularFoodController.dart';
 import 'package:get/get.dart';
 
 // ignore: must_be_immutable
@@ -13,26 +16,28 @@ class UpperPageView extends StatelessWidget {
     required this.currpageindex,
     required this.scalefactor,
     required this.pageController,
+    this.controller,
   });
 
   double currpageindex;
   PageController pageController;
   double scalefactor;
+  PopularFoodController? controller;
   @override
   Widget build(BuildContext context) {
     return Container(
       height: MySizes.pageView,
       child: PageView.builder(
         controller: pageController,
-        itemCount: 5,
+        itemCount: controller?.popularProductsList.length,
         itemBuilder: (context, index) {
-          return buildPageItem(index);
+          return buildPageItem(index, controller!.popularProductsList[index]);
         },
       ),
     );
   }
 
-  Widget buildPageItem(int index) {
+  Widget buildPageItem(int index, ProductModel product) {
     Matrix4 matrix = Matrix4.identity();
     if (index == currpageindex.floor()) {
       double currscale = 1 - (currpageindex - index) * (1 - scalefactor);
@@ -69,9 +74,9 @@ class UpperPageView extends StatelessWidget {
                   left: MySizes.width10, right: MySizes.width10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(MySizes.radius30),
-                color: index.isEven ? Colors.green : Colors.red,
-                image: const DecorationImage(
-                  image: AssetImage('assets/image/food1.png'),
+                image: DecorationImage(
+                  image: NetworkImage(
+                      '${MyAppConstants.baseUrl}/uploads/${product.img!}'),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -113,13 +118,13 @@ class UpperPageView extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const MyBigText(text: 'Chinese Side'),
+                      MyBigText(text: product.name!),
                       SizedBox(height: MySizes.height10),
                       Row(
                         children: [
                           Wrap(
                             children: List.generate(
-                              5,
+                              product.stars!,
                               (index) => const Icon(
                                 Icons.star,
                                 color: MyColors.mainColor,

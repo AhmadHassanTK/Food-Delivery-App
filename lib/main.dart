@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/Views/Home/HomePage.dart';
 import 'package:food_delivery_app/Views/PopularFoodDetails/Controller/PopularFoodController.dart';
+import 'package:food_delivery_app/Views/RecommendedFoodDetails/Controller/RecommenededFoodController.dart';
 import 'package:get/get.dart';
 import 'utils/API/Dependencies.dart' as dep;
 
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     PopularFoodController.instance.getPopularProductsList();
+    RecommendedFoodController.instance.getRecommendedProductsList();
     return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
       home: HomePage(),

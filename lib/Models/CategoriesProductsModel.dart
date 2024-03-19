@@ -1,20 +1,20 @@
 import 'ProductModel.dart';
 
-class PopularProductModel {
+class CategoriesProductsModel {
   int? totalSize;
   int? typeId;
   int? offset;
   late List<ProductModel> products;
   List<ProductModel>? get productsList => products;
-  PopularProductModel({
+  CategoriesProductsModel({
     required this.totalSize,
     required this.typeId,
     required this.offset,
     required this.products,
   });
 
-  factory PopularProductModel.fromJson(Map<String, dynamic> json) {
-    return PopularProductModel(
+  factory CategoriesProductsModel.fromJson(Map<String, dynamic> json) {
+    return CategoriesProductsModel(
       totalSize: json['total_size'] as int?,
       typeId: json['type_id'] as int?,
       offset: json['offset'] as int?,
