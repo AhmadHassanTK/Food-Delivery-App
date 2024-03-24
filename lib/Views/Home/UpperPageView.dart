@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery_app/Models/ProductModel.dart';
 import 'package:food_delivery_app/Utils/Constants/MyAppConstants.dart';
 import 'package:food_delivery_app/Utils/Constants/MyColors.dart';
+import 'package:food_delivery_app/Utils/Constants/MyRoutesHelper.dart';
 import 'package:food_delivery_app/Utils/Constants/MySizes.dart';
 import 'package:food_delivery_app/Utils/Widgets/MyBigText.dart';
 import 'package:food_delivery_app/Utils/Widgets/MySmallText.dart';
@@ -66,6 +67,7 @@ class UpperPageView extends StatelessWidget {
     return Transform(
       transform: matrix,
       child: GestureDetector(
+        onTap: () => Get.toNamed(MyRoutesHelper.getPopularFood(index)),
         child: Stack(
           children: [
             Container(

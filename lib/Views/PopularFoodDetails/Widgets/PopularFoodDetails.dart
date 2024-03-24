@@ -1,21 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/Utils/Constants/MyAppConstants.dart';
 import 'package:food_delivery_app/Utils/Constants/MyColors.dart';
+import 'package:food_delivery_app/Utils/Constants/MyRoutesHelper.dart';
 import 'package:food_delivery_app/Utils/Constants/MySizes.dart';
 import 'package:food_delivery_app/Utils/Widgets/MyAppIcon.dart';
 import 'package:food_delivery_app/Utils/Widgets/MyBigText.dart';
 import 'package:food_delivery_app/Utils/Widgets/MySmallText.dart';
 import 'package:food_delivery_app/Utils/Widgets/MyTextAndIcon.dart';
+import 'package:food_delivery_app/Views/PopularFoodDetails/Controller/PopularFoodController.dart';
 import 'package:food_delivery_app/Views/PopularFoodDetails/Widgets/ExtendableText.dart';
 import 'package:food_delivery_app/Views/PopularFoodDetails/Widgets/PopularFoodDetailsBottomBar.dart';
+import 'package:get/get.dart';
 
+// ignore: must_be_immutable
 class PopularFoodDetails extends StatelessWidget {
-  const PopularFoodDetails({super.key});
+  int pageId;
+  PopularFoodDetails({super.key, required this.pageId});
 
   @override
   Widget build(BuildContext context) {
+    final product =
+        Get.find<PopularFoodController>().popularProductsList[pageId];
+    Get.find<PopularFoodController>().initProduct();
     return Scaffold(
       backgroundColor: Colors.white,
-      bottomNavigationBar: const PopularFoodDetailsBottomBar(),
+      bottomNavigationBar: PopularFoodDetailsBottomBar(product: product),
       body: Stack(
         children: [
           Positioned(
@@ -24,9 +33,10 @@ class PopularFoodDetails extends StatelessWidget {
             child: Container(
               width: double.infinity,
               height: MySizes.foodImgSize,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/image/food0.png'),
+                  image: NetworkImage(
+                      '${MyAppConstants.baseUrl}/uploads/${product.img!}'),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -36,11 +46,14 @@ class PopularFoodDetails extends StatelessWidget {
             left: MySizes.width20,
             right: MySizes.width20,
             top: MySizes.height45,
-            child: const Row(
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                MyAppIcon(icon: Icons.arrow_back_ios),
-                MyAppIcon(icon: Icons.shopping_cart_outlined),
+                GestureDetector(
+                  onTap: () => Get.toNamed(MyRoutesHelper.getInitial()),
+                  child: const MyAppIcon(icon: Icons.arrow_back_ios),
+                ),
+                const MyAppIcon(icon: Icons.shopping_cart_outlined),
               ],
             ),
           ),
@@ -68,13 +81,13 @@ class PopularFoodDetails extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      MyBigText(text: 'Chinese Side', size: MySizes.font26),
+                      MyBigText(text: product.name!, size: MySizes.font26),
                       SizedBox(height: MySizes.height10),
                       Row(
                         children: [
                           Wrap(
                             children: List.generate(
-                              5,
+                              product.stars!,
                               (index) => const Icon(
                                 Icons.star,
                                 color: MyColors.mainColor,
@@ -114,12 +127,9 @@ class PopularFoodDetails extends StatelessWidget {
                   SizedBox(height: MySizes.height20),
                   const MyBigText(text: 'Introduce'),
                   SizedBox(height: MySizes.height15),
-                  const Expanded(
+                  Expanded(
                     child: SingleChildScrollView(
-                      child: ExtendableText(
-                        text:
-                            'Food, substance consisting essentially of protein, carbohydrate, fat, and other nutrients used in the body of an organism to sustain growth and vital processes and to furnish energy. The absorption and utilization of food by the body is fundamental to nutrition and is facilitated by digestion. Plants, which convert solar energy to food by photosynthesis, are the primary food source. Animals that feed on plants often serve as sources of food for other animals. To learn more about the sequence of transfers of matter and energy in the form of food from organism to organism, see food chain gathering, horticulture, pastoralism, and the development of agriculture are the primary means by which humans have adapted to their environments to feed themselves. Food has long served as a carrier of culture in human societies and has been a driving force for globalization. This was especially the case during the early phases of European trade and colonial expansion, when foods such as the hot red pepper, corn (maize), and sweet potatoes spread throughout Europe to Africa and Asia.',
-                      ),
+                      child: ExtendableText(text: product.description!),
                     ),
                   ),
                 ],

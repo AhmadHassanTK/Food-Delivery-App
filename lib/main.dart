@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/Utils/Constants/MyRoutesHelper.dart';
 import 'package:food_delivery_app/Views/Home/HomePage.dart';
 import 'package:food_delivery_app/Views/PopularFoodDetails/Controller/PopularFoodController.dart';
 import 'package:food_delivery_app/Views/RecommendedFoodDetails/Controller/RecommenededFoodController.dart';
@@ -18,9 +19,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     PopularFoodController.instance.getPopularProductsList();
     RecommendedFoodController.instance.getRecommendedProductsList();
-    return const GetMaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: const HomePage(),
+      getPages: MyRoutesHelper.routes,
     );
   }
 }
