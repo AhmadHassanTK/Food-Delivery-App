@@ -22,7 +22,7 @@ class MyRoutesHelper {
     GetPage(
       name: popularFood,
       page: () {
-        final pageId = Get.parameters['PageId'];
+        final pageId = Get.parameters['pageId'];
         return PopularFoodDetails(pageId: int.parse(pageId!));
       },
       transition: Transition.fadeIn,
@@ -30,7 +30,7 @@ class MyRoutesHelper {
     GetPage(
       name: recommendedFood,
       page: () {
-        final pageId = Get.parameters['PageId'];
+        final pageId = Get.parameters['pageId'];
         return RecommendedFoodDetails(pageId: int.parse(pageId!));
       },
       transition: Transition.fadeIn,

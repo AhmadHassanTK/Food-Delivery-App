@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:food_delivery_app/Utils/Constants/MyAppConstants.dart';
 import 'package:food_delivery_app/Utils/Constants/MyColors.dart';
 import 'package:food_delivery_app/Utils/Constants/MyRoutesHelper.dart';
@@ -72,8 +74,20 @@ class FoodListView extends StatelessWidget {
                                           .name!,
                                     ),
                                     SizedBox(height: MySizes.height10),
-                                    const MySmallText(
-                                      text: 'With chinese characteristics',
+                                    Expanded(
+                                      child: MySmallText(
+                                        text: controller
+                                            .recommenededProductsList[index]
+                                            .description!,
+                                        overflow: controller
+                                                    .recommenededProductsList[
+                                                        index]
+                                                    .description!
+                                                    .length >
+                                                50
+                                            ? TextOverflow.ellipsis
+                                            : null,
+                                      ),
                                     ),
                                     SizedBox(height: MySizes.height10),
                                     const Row(

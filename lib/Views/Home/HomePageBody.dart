@@ -71,7 +71,8 @@ class _HomePageBodyState extends State<HomePageBody> {
               },
             ),
             SizedBox(height: MySizes.height30),
-            const MySectionTitle(bigText: 'Popular', smallText: 'Food Pairing'),
+            const MySectionTitle(
+                bigText: 'Recommended', smallText: 'Food Pairing'),
             const FoodListView(),
           ],
         ),

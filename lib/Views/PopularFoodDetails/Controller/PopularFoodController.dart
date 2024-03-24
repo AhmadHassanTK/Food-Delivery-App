@@ -20,6 +20,12 @@ class PopularFoodController extends GetxController {
 
   int get quantity => _quantity;
 
+  @override
+  void onInit() {
+    getPopularProductsList();
+    super.onInit();
+  }
+
   Future<void> getPopularProductsList() async {
     Response response = await popularFoodRepo.getPopularProductsList();
     if (response.statusCode == 200) {

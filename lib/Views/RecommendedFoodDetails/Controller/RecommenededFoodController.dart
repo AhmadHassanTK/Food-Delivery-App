@@ -14,6 +14,12 @@ class RecommendedFoodController extends GetxController {
 
   List<ProductModel> get recommenededProductsList => _recommendedProductsList;
 
+  @override
+  void onInit() {
+    getRecommendedProductsList();
+    super.onInit();
+  }
+
   Future<void> getRecommendedProductsList() async {
     Response response = await recommendedFoodRepo.getRecommenededProductsList();
     if (response.statusCode == 200) {
