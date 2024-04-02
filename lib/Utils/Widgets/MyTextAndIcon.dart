@@ -19,7 +19,7 @@ class MyTextAndIcon extends StatelessWidget {
     return Row(
       children: [
         Icon(icon, color: iconColor, size: MySizes.iconsize24),
-        const SizedBox(width: 5),
+        SizedBox(width: MySizes.width3),
         MySmallText(text: text)
       ],
     );

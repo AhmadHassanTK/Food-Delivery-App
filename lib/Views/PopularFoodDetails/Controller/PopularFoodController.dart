@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery_app/Models/CategoriesProductsModel.dart';
 import 'package:food_delivery_app/Models/ProductModel.dart';
 import 'package:food_delivery_app/Utils/Constants/MyColors.dart';
+import 'package:food_delivery_app/Views/Cart/Controller/CartController.dart';
 import 'package:food_delivery_app/Views/PopularFoodDetails/Repo/PopularFoodRepo.dart';
 import 'package:get/get.dart';
 
@@ -12,13 +13,19 @@ class PopularFoodController extends GetxController {
 
   PopularFoodController({required this.popularFoodRepo});
 
-  List<ProductModel> _popularProductsList = [];
+  final List<ProductModel> _popularProductsList = [];
 
   List<ProductModel> get popularProductsList => _popularProductsList;
 
   int _quantity = 0;
 
   int get quantity => _quantity;
+
+  int _cartItems = 0;
+
+  int get cartItems => _cartItems + _quantity;
+
+  CartController cartController = Get.find();
 
   @override
   void onInit() {
@@ -39,9 +46,9 @@ class PopularFoodController extends GetxController {
 
   void setQuantity(bool isIncrement) {
     if (isIncrement) {
-      checkQuantity(_quantity += 1);
+      _quantity = checkQuantity(_quantity += 1);
     } else {
-      checkQuantity(_quantity -= 1);
+      _quantity = checkQuantity(_quantity -= 1);
     }
     update();
   }
@@ -70,5 +77,19 @@ class PopularFoodController extends GetxController {
 
   void initProduct() {
     _quantity = 0;
+    _cartItems = 0;
+  }
+
+  void addItem(ProductModel product) {
+    if (_quantity > 0) {
+      cartController.addItems(product, _quantity);
+    } else {
+      Get.snackbar(
+        'Items',
+        'You should add items to the cart !',
+        backgroundColor: MyColors.mainColor,
+        colorText: Colors.white,
+      );
+    }
   }
 }

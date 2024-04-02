@@ -26,7 +26,7 @@ class UpperPageView extends StatelessWidget {
   PopularFoodController? controller;
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: MySizes.pageView,
       child: PageView.builder(
         controller: pageController,
@@ -64,6 +64,8 @@ class UpperPageView extends StatelessWidget {
         ..setTranslationRaw(0, 220 * (1 - currscale) / 2, 0);
     }
     print('the height is ${Get.context!.height}');
+    print('the width is ${Get.context!.width}');
+
     return Transform(
       transform: matrix,
       child: GestureDetector(

@@ -10,7 +10,7 @@ class RecommendedFoodController extends GetxController {
 
   RecommendedFoodController({required this.recommendedFoodRepo});
 
-  List<ProductModel> _recommendedProductsList = [];
+  final List<ProductModel> _recommendedProductsList = [];
 
   List<ProductModel> get recommenededProductsList => _recommendedProductsList;
 

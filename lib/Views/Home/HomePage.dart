@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:food_delivery_app/Utils/Constants/MyColors.dart';
 import 'package:food_delivery_app/Utils/Constants/MySizes.dart';
 import 'package:food_delivery_app/Utils/Widgets/MyBigText.dart';
@@ -49,7 +47,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Center(
                     child: Container(
-                      width: MySizes.width45,
+                      width: MySizes.height45,
                       height: MySizes.height45,
                       decoration: BoxDecoration(
                         color: MyColors.mainColor,

@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:food_delivery_app/Models/ProductModel.dart';
 import 'package:food_delivery_app/Utils/Constants/MyColors.dart';
 import 'package:food_delivery_app/Utils/Constants/MySizes.dart';
@@ -77,9 +75,12 @@ class PopularFoodDetailsBottomBar extends StatelessWidget {
                   borderRadius: BorderRadius.circular(MySizes.radius20),
                   color: MyColors.mainColor,
                 ),
-                child: MyBigText(
-                    text: '\$${product.price} | Add to cart',
-                    color: Colors.white),
+                child: GestureDetector(
+                  onTap: () => controller.addItem(product),
+                  child: MyBigText(
+                      text: '\$${product.price} | Add to cart',
+                      color: Colors.white),
+                ),
               ),
             ],
           ),

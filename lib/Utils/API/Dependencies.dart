@@ -1,4 +1,6 @@
 import 'package:food_delivery_app/Utils/API/APIClient.dart';
+import 'package:food_delivery_app/Views/Cart/Controller/CartController.dart';
+import 'package:food_delivery_app/Views/Cart/Repo/CartRepo.dart';
 import 'package:food_delivery_app/Views/PopularFoodDetails/Controller/PopularFoodController.dart';
 import 'package:food_delivery_app/Views/PopularFoodDetails/Repo/PopularFoodRepo.dart';
 import 'package:food_delivery_app/Views/RecommendedFoodDetails/Controller/RecommenededFoodController.dart';
@@ -7,9 +9,12 @@ import 'package:get/get.dart';
 
 Future<void> init() async {
   Get.lazyPut(() => APIClient(appBaseUrl: 'http://mvs.bslmeiyu.com'));
+
   Get.lazyPut(() => PopularFoodRepo(apiClient: Get.find()));
   Get.lazyPut(() => RecommendedFoodRepo(apiClient: Get.find()));
+  Get.lazyPut(() => CartRepo());
 
   Get.lazyPut(() => PopularFoodController(popularFoodRepo: Get.find()));
   Get.lazyPut(() => RecommendedFoodController(recommendedFoodRepo: Get.find()));
+  Get.lazyPut(() => CartController(cartRepo: Get.find()));
 }

@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:food_delivery_app/Utils/Constants/MyAppConstants.dart';
 import 'package:food_delivery_app/Utils/Constants/MyColors.dart';
 import 'package:food_delivery_app/Utils/Constants/MyRoutesHelper.dart';
@@ -27,7 +25,8 @@ class FoodListView extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
                   return GestureDetector(
-                    onTap: () => Get.toNamed(MyRoutesHelper.recommendedFood),
+                    onTap: () =>
+                        Get.toNamed(MyRoutesHelper.getRecommendedFood(index)),
                     child: Container(
                       margin: EdgeInsets.only(
                         left: MySizes.width20,
@@ -61,8 +60,8 @@ class FoodListView extends StatelessWidget {
                               ),
                               child: Padding(
                                 padding: EdgeInsets.only(
-                                  right: MySizes.width15,
-                                  left: MySizes.width15,
+                                  right: MySizes.width5,
+                                  left: MySizes.width5,
                                 ),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -84,7 +83,7 @@ class FoodListView extends StatelessWidget {
                                                         index]
                                                     .description!
                                                     .length >
-                                                50
+                                                30
                                             ? TextOverflow.ellipsis
                                             : null,
                                       ),
