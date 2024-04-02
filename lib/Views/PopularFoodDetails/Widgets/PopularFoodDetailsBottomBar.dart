@@ -55,7 +55,7 @@ class PopularFoodDetailsBottomBar extends StatelessWidget {
                           const Icon(Icons.remove, color: MyColors.signColor),
                     ),
                     SizedBox(width: MySizes.width10),
-                    MyBigText(text: controller.quantity.toString()),
+                    MyBigText(text: controller.cartItems.toString()),
                     SizedBox(width: MySizes.width10),
                     GestureDetector(
                       onTap: () => controller.setQuantity(true),

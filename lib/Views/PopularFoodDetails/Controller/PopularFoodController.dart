@@ -54,7 +54,7 @@ class PopularFoodController extends GetxController {
   }
 
   int checkQuantity(int quantity) {
-    if (quantity < 0) {
+    if ((quantity + _cartItems) < 0) {
       Get.snackbar(
         'Items',
         'You can\'t reduce more !',
@@ -62,7 +62,7 @@ class PopularFoodController extends GetxController {
         colorText: Colors.white,
       );
       return 0;
-    } else if (quantity > 10) {
+    } else if ((quantity + _cartItems) > 10) {
       Get.snackbar(
         'Items',
         'You can\'t add more !',
@@ -75,21 +75,24 @@ class PopularFoodController extends GetxController {
     }
   }
 
-  void initProduct() {
+  void initProduct(ProductModel product) {
     _quantity = 0;
     _cartItems = 0;
+    final exist = cartController.existInItems(product);
+    if (exist) {
+      _cartItems = cartController.getProductQuantityFromCart(product);
+    }
+    print('the quantity in the cart is ' + _cartItems.toString());
   }
 
   void addItem(ProductModel product) {
-    if (_quantity > 0) {
-      cartController.addItems(product, _quantity);
-    } else {
-      Get.snackbar(
-        'Items',
-        'You should add items to the cart !',
-        backgroundColor: MyColors.mainColor,
-        colorText: Colors.white,
-      );
-    }
+    cartController.addItems(product, _quantity);
+    _quantity = 0;
+    _cartItems = cartController.getProductQuantityFromCart(product);
+    update();
+  }
+
+  int get totalCartItems {
+    return cartController.totalItems;
   }
 }

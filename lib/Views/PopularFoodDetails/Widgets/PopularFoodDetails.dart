@@ -21,7 +21,7 @@ class PopularFoodDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     final product =
         Get.find<PopularFoodController>().popularProductsList[pageId];
-    Get.find<PopularFoodController>().initProduct();
+    Get.find<PopularFoodController>().initProduct(product);
     return Scaffold(
       backgroundColor: Colors.white,
       bottomNavigationBar: PopularFoodDetailsBottomBar(product: product),
@@ -53,7 +53,37 @@ class PopularFoodDetails extends StatelessWidget {
                   onTap: () => Get.toNamed(MyRoutesHelper.getInitial()),
                   child: const MyAppIcon(icon: Icons.arrow_back_ios),
                 ),
-                const MyAppIcon(icon: Icons.shopping_cart_outlined),
+                GetBuilder<PopularFoodController>(
+                  builder: (controller) {
+                    return Stack(
+                      children: [
+                        const MyAppIcon(icon: Icons.shopping_cart_outlined),
+                        controller.totalCartItems >= 1
+                            ? const Positioned(
+                                right: 0,
+                                top: 0,
+                                child: MyAppIcon(
+                                  icon: Icons.circle,
+                                  size: 20,
+                                  iconColor: Colors.transparent,
+                                  backgroundColor: MyColors.mainColor,
+                                ),
+                              )
+                            : Container(),
+                        controller.totalCartItems >= 1
+                            ? Positioned(
+                                right: 6,
+                                top: 2,
+                                child: MyBigText(
+                                  text: controller.totalCartItems.toString(),
+                                  size: 12,
+                                  color: Colors.white,
+                                ))
+                            : Container()
+                      ],
+                    );
+                  },
+                )
               ],
             ),
           ),
