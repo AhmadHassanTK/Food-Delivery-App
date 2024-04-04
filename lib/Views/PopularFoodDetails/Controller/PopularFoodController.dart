@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/Models/CartModel.dart';
 import 'package:food_delivery_app/Models/CategoriesProductsModel.dart';
 import 'package:food_delivery_app/Models/ProductModel.dart';
 import 'package:food_delivery_app/Utils/Constants/MyColors.dart';
@@ -61,6 +62,10 @@ class PopularFoodController extends GetxController {
         backgroundColor: MyColors.mainColor,
         colorText: Colors.white,
       );
+      if (_cartItems > 0) {
+        _quantity = -_cartItems;
+        return _quantity;
+      }
       return 0;
     } else if ((quantity + _cartItems) > 10) {
       Get.snackbar(
@@ -94,5 +99,9 @@ class PopularFoodController extends GetxController {
 
   int get totalCartItems {
     return cartController.totalItems;
+  }
+
+  List<CartModel> get getItems {
+    return cartController.getItems;
   }
 }
