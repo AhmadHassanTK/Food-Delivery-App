@@ -3,11 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:food_delivery_app/Utils/Constants/MyAppConstants.dart';
 import 'package:food_delivery_app/Utils/Constants/MyColors.dart';
+import 'package:food_delivery_app/Utils/Constants/MyRoutesHelper.dart';
 import 'package:food_delivery_app/Utils/Constants/MySizes.dart';
 import 'package:food_delivery_app/Utils/Widgets/MyAppIcon.dart';
 import 'package:food_delivery_app/Utils/Widgets/MyBigText.dart';
 import 'package:food_delivery_app/Utils/Widgets/MySmallText.dart';
 import 'package:food_delivery_app/Views/Cart/Controller/CartController.dart';
+import 'package:food_delivery_app/Views/PopularFoodDetails/Controller/PopularFoodController.dart';
+import 'package:food_delivery_app/Views/RecommendedFoodDetails/Controller/RecommenededFoodController.dart';
 import 'package:get/get.dart';
 
 class CartPage extends StatelessWidget {
@@ -25,18 +28,24 @@ class CartPage extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                MyAppIcon(
-                  icon: Icons.arrow_back_ios,
-                  iconColor: Colors.white,
-                  backgroundColor: MyColors.mainColor,
-                  iconsize: MySizes.iconsize24,
+                GestureDetector(
+                  onTap: () => Get.back(),
+                  child: MyAppIcon(
+                    icon: Icons.arrow_back_ios,
+                    iconColor: Colors.white,
+                    backgroundColor: MyColors.mainColor,
+                    iconsize: MySizes.iconsize24,
+                  ),
                 ),
                 SizedBox(width: MySizes.radius20 * 2),
-                MyAppIcon(
-                  icon: Icons.home_outlined,
-                  iconColor: Colors.white,
-                  backgroundColor: MyColors.mainColor,
-                  iconsize: MySizes.iconsize24,
+                GestureDetector(
+                  onTap: () => Get.toNamed(MyRoutesHelper.getInitial()),
+                  child: MyAppIcon(
+                    icon: Icons.home_outlined,
+                    iconColor: Colors.white,
+                    backgroundColor: MyColors.mainColor,
+                    iconsize: MySizes.iconsize24,
+                  ),
                 ),
                 MyAppIcon(
                   icon: Icons.shopping_cart,
@@ -61,19 +70,42 @@ class CartPage extends StatelessWidget {
                     width: double.infinity,
                     child: Row(
                       children: [
-                        Container(
-                          width: MySizes.width20 * 5,
-                          height: MySizes.height20 * 5,
-                          margin: EdgeInsets.only(bottom: MySizes.height10),
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: NetworkImage(
-                                  '${MyAppConstants.baseUrl}/uploads/${controller.getItems[index].img}'),
-                              fit: BoxFit.cover,
+                        GestureDetector(
+                          onTap: () {
+                            final productIndex =
+                                Get.find<PopularFoodController>()
+                                    .popularProductsList
+                                    .indexOf(
+                                        controller.getItems[index].product!);
+
+                            if (productIndex >= 0) {
+                              Get.toNamed(
+                                  MyRoutesHelper.getPopularFood(productIndex));
+                            } else {
+                              final productIndex =
+                                  Get.find<RecommendedFoodController>()
+                                      .recommenededProductsList
+                                      .indexOf(
+                                          controller.getItems[index].product!);
+
+                              Get.toNamed(MyRoutesHelper.getRecommendedFood(
+                                  productIndex));
+                            }
+                          },
+                          child: Container(
+                            width: MySizes.width20 * 5,
+                            height: MySizes.height20 * 5,
+                            margin: EdgeInsets.only(bottom: MySizes.height10),
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                    '${MyAppConstants.baseUrl}/uploads/${controller.getItems[index].img}'),
+                                fit: BoxFit.cover,
+                              ),
+                              borderRadius:
+                                  BorderRadius.circular(MySizes.radius20),
+                              color: Colors.white,
                             ),
-                            borderRadius:
-                                BorderRadius.circular(MySizes.radius20),
-                            color: Colors.white,
                           ),
                         ),
                         SizedBox(width: MySizes.width10),
@@ -113,13 +145,25 @@ class CartPage extends StatelessWidget {
                                       child: Row(
                                         children: [
                                           GestureDetector(
+                                            onTap: () => controller.addItems(
+                                                controller
+                                                    .getItems[index].product!,
+                                                -1),
                                             child: const Icon(Icons.remove,
                                                 color: MyColors.signColor),
                                           ),
                                           SizedBox(width: MySizes.width10),
-                                          MyBigText(text: '0'),
+                                          MyBigText(
+                                            text: controller
+                                                .getItems[index].quantity
+                                                .toString(),
+                                          ),
                                           SizedBox(width: MySizes.width10),
                                           GestureDetector(
+                                            onTap: () => controller.addItems(
+                                                controller
+                                                    .getItems[index].product!,
+                                                1),
                                             child: const Icon(Icons.add,
                                                 color: MyColors.signColor),
                                           )

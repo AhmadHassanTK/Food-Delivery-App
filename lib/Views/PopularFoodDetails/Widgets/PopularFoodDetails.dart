@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:food_delivery_app/Utils/Constants/MyAppConstants.dart';
 import 'package:food_delivery_app/Utils/Constants/MyColors.dart';
 import 'package:food_delivery_app/Utils/Constants/MyRoutesHelper.dart';
@@ -8,7 +7,6 @@ import 'package:food_delivery_app/Utils/Widgets/MyAppIcon.dart';
 import 'package:food_delivery_app/Utils/Widgets/MyBigText.dart';
 import 'package:food_delivery_app/Utils/Widgets/MySmallText.dart';
 import 'package:food_delivery_app/Utils/Widgets/MyTextAndIcon.dart';
-import 'package:food_delivery_app/Views/Cart/Cart.dart';
 import 'package:food_delivery_app/Views/PopularFoodDetails/Controller/PopularFoodController.dart';
 import 'package:food_delivery_app/Views/PopularFoodDetails/Widgets/ExtendableText.dart';
 import 'package:food_delivery_app/Views/PopularFoodDetails/Widgets/PopularFoodDetailsBottomBar.dart';
@@ -52,41 +50,40 @@ class PopularFoodDetails extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 GestureDetector(
-                  onTap: () => Get.toNamed(MyRoutesHelper.getInitial()),
+                  onTap: () => Get.back(),
                   child: const MyAppIcon(icon: Icons.arrow_back_ios),
                 ),
                 GetBuilder<PopularFoodController>(
                   builder: (controller) {
-                    return Stack(
-                      children: [
-                        GestureDetector(
-                          onTap: () => Get.to(const CartPage()),
-                          child: const MyAppIcon(
-                              icon: Icons.shopping_cart_outlined),
-                        ),
-                        controller.totalCartItems >= 1
-                            ? const Positioned(
-                                right: 0,
-                                top: 0,
-                                child: MyAppIcon(
-                                  icon: Icons.circle,
-                                  size: 20,
-                                  iconColor: Colors.transparent,
-                                  backgroundColor: MyColors.mainColor,
-                                ),
-                              )
-                            : Container(),
-                        controller.totalCartItems >= 1
-                            ? Positioned(
-                                right: 6,
-                                top: 2,
-                                child: MyBigText(
-                                  text: controller.totalCartItems.toString(),
-                                  size: 12,
-                                  color: Colors.white,
-                                ))
-                            : Container()
-                      ],
+                    return GestureDetector(
+                      onTap: () => Get.toNamed(MyRoutesHelper.getCartPage()),
+                      child: Stack(
+                        children: [
+                          const MyAppIcon(icon: Icons.shopping_cart_outlined),
+                          controller.totalCartItems >= 1
+                              ? const Positioned(
+                                  right: 0,
+                                  top: 0,
+                                  child: MyAppIcon(
+                                    icon: Icons.circle,
+                                    size: 20,
+                                    iconColor: Colors.transparent,
+                                    backgroundColor: MyColors.mainColor,
+                                  ),
+                                )
+                              : Container(),
+                          controller.totalCartItems >= 1
+                              ? Positioned(
+                                  right: 6,
+                                  top: 2,
+                                  child: MyBigText(
+                                    text: controller.totalCartItems.toString(),
+                                    size: 12,
+                                    color: Colors.white,
+                                  ))
+                              : Container()
+                        ],
+                      ),
                     );
                   },
                 )

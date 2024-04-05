@@ -131,14 +131,19 @@ class RecommendedFoodDetails extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 GestureDetector(
-                  onTap: () => Get.toNamed(MyRoutesHelper.getInitial()),
+                  onTap: () => Get.back(),
                   child: const MyAppIcon(icon: Icons.clear),
                 ),
                 GetBuilder<PopularFoodController>(
                   builder: (controller) {
                     return Stack(
                       children: [
-                        const MyAppIcon(icon: Icons.shopping_cart_outlined),
+                        GestureDetector(
+                          onTap: () =>
+                              Get.toNamed(MyRoutesHelper.getCartPage()),
+                          child: const MyAppIcon(
+                              icon: Icons.shopping_cart_outlined),
+                        ),
                         controller.totalCartItems >= 1
                             ? const Positioned(
                                 right: 0,
